@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veera Ballala School - Result Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #f0f4f8;
+      color: #333;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      max-width: 600px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #0056b3;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      color: #0056b3;
+      font-size: 24px;
+    }
+    .header p {
+      color: #666;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: #0056b3;
+    }
+    button {
+      padding: 12px 20px;
+      background: #0056b3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #004085;
+    }
+    .result-section {
+      display: none;
+      margin-top: 20px;
+      border-top: 1px dashed #ccc;
+      padding-top: 20px;
+    }
+    .student-info {
+      margin-bottom: 15px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+    th {
+      background: #f8f9fa;
+    }
+    .status {
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .pass {
+      background: #d4edda;
+      color: #155724;
+    }
+    .fail {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .print-btn {
+      background: #28a745;
+    }
+    .print-btn:hover {
+      background: #218838;
+    }
+    .error-msg {
+      color: #dc3545;
+      text-align: center;
+      display: none;
+      font-weight: bold;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .search-box, .actions { display: none; }
+      .card { box-shadow: none; border: none; width: 100%; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="header">
+      <h1>ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಶಾಲೆ</h1>
+      <p>Veera Ballala High School - Result Portal</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="regNo" placeholder="ನೋಂದಣಿ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ (उदा: 101, 102)...">
+      <button onclick="checkResult()">ಹುಡುಕಿ</button>
+    </div>
+
+    <div id="error" class="error-msg">ಫಲಿತಾಂಶ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಸರಿಯಾದ ನೋಂದಣಿ ಸಂಖ್ಯೆ ಹಾಕಿ.</div>
+
+    <div id="result" class="result-section">
+      <div class="student-info">
+        <p><strong>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು:</strong> <span id="sName"></span></p>
+        <p><strong>ನೋಂದಣಿ ಸಂಖ್ಯೆ:</strong> <span id="sRoll"></span></p>
+        <p><strong>ತರಗತಿ:</strong> 10th Standard</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ವಿಷಯ (Subject)</th>
+            <th>ಗರಿಷ್ಠ ಅಂಕ</th>
+            <th>ಪಡೆದ ಅಂಕ</th>
+          </tr>
+        </thead>
+        <tbody id="marksBody">
+          <!-- Marks added via JS -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>ಒಟ್ಟು ಅಂಕಗಳು</th>
+            <th>600</th>
+            <th id="totalMarks"></th>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p style="margin-bottom: 10px;"><strong>ಶೇಕಡಾವಾರು (Percentage):</strong> <span id="percentage"></span>%</p>
+      <p><strong>ಫಲಿತಾಂಶ (Status):</strong> <span id="statusBadge" class="status"></span></p>
+
+      <div class="actions">
+        <button class="print-btn" onclick="window.print()">ಪ್ರಿಂಟ್ ಮಾಡಿ (Print)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ಮಾದರಿ ವಿದ್ಯಾರ್ಥಿ ಡೇಟಾ (ನಿಮಗೆ ಬೇಕಾದಂತೆ ಬದಲಾಯಿಸಿಕೊಳ್ಳಬಹುದು)
+    const studentsData = {
+      "101": {
+        name: "ರಮೇಶ್ ಕುಮಾರ್ (Ramesh Kumar)",
+        marks: { "ಕನ್ನಡ": 92, "ಇಂಗ್ಲಿಷ್": 85, "ಹಿಂದಿ": 80, "ಗಣಿತ": 88, "ವಿಜ್ಞಾನ": 90, "ಸಮಾಜ ವಿಜ್ಞಾನ": 86 }
+      },
+      "102": {
+        name: "ಸುಪ್ರಿಯಾ ಎನ್ (Supriya N)",
+        marks: { "ಕನ್ನಡ": 95, "ಇಂಗ್ಲಿಷ್": 91, "ಹಿಂದಿ": 89, "ಗಣಿತ": 96, "ವಿಜ್ಞಾನ": 94, "ಸಮಾಜ ವಿಜ್ಞಾನ": 92 }
+      },
+      "103": {
+        name: "ಮಹೇಶ್ ಬಿ (Mahesh B)",
+        marks: { "ಕನ್ನಡ": 45, "ಇಂಗ್ಲಿಷ್": 40, "ಹಿಂದಿ": 38, "ಗಣಿತ": 30, "ವಿಜ್ಞಾನ": 35, "ಸಮಾಜ ವಿಜ್ಞಾನ": 42 }
+      }
+    };
+
+    function checkResult() {
+      const regNo = document.getElementById("regNo").value.trim();
+      const resultDiv = document.getElementById("result");
+      const errorDiv = document.getElementById("error");
+      const marksBody = document.getElementById("marksBody");
+
+      if (studentsData[regNo]) {
+        const student = studentsData[regNo];
+        document.getElementById("sName").textContent = student.name;
+        document.getElementById("sRoll").textContent = regNo;
+
+        marksBody.innerHTML = "";
+        let total = 0;
+        let isPass = true;
+
+        for (const [subject, mark] of Object.entries(student.marks)) {
+          total += mark;
+          if (mark < 35) isPass = false;
+          marksBody.innerHTML += `<tr><td>${subject}</td><td>100</td><td>${mark}</td></tr>`;
+        }
+
+        const percentage = ((total / 600) * 100).toFixed(2);
+        document.getElementById("totalMarks").textContent = total;
+        document.getElementById("percentage").textContent = percentage;
+
+        const badge = document.getElementById("statusBadge");
+        badge.textContent = isPass ? "PASS (ತೇರ್ಗಡೆ)" : "FAIL (ಅನುತ್ತೀರ್ಣ)";
+        badge.className = isPass ? "status pass" : "status fail";
+
+        errorDiv.style.display = "none";
+        resultDiv.style.display = "block";
+      } else {
+        resultDiv.style.display = "none";
+        errorDiv.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
