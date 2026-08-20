@@ -3,243 +3,492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veera Ballala School - Result Portal</title>
+
+  <title>ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಗ್ರಾಮಾಂತರ ಪ್ರೌಢಶಾಲೆ - ಫಲಿತಾಂಶ</title>
+
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     body {
-      background: #f0f4f8;
-      color: #333;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: "Noto Sans Kannada", "Tunga", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef5ff, #f8fbff);
+      color: #222;
       min-height: 100vh;
     }
-    .card {
-      background: #ffffff;
-      max-width: 600px;
-      width: 100%;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-    .header {
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #123c8c, #1769aa);
+      color: white;
+      padding: 25px 15px;
       text-align: center;
-      border-bottom: 2px solid #0056b3;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
-    .header h1 {
-      color: #0056b3;
-      font-size: 24px;
+
+    .school-icon {
+      width: 75px;
+      height: 75px;
+      background: white;
+      color: #123c8c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 38px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    .header p {
+
+    header h1 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    header h2 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .academic-year {
+      display: inline-block;
+      margin-top: 12px;
+      background: white;
+      color: #123c8c;
+      padding: 7px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #123c8c;
+      font-weight: bold;
+      margin: 0 15px;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #e65100;
+    }
+
+    /* Main */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .welcome h2 {
+      color: #123c8c;
+      margin-bottom: 10px;
+      font-size: 27px;
+    }
+
+    .welcome p {
+      color: #555;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px 18px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.13);
+    }
+
+    .card .icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      color: #123c8c;
+      margin-bottom: 8px;
+    }
+
+    .card p {
       color: #666;
       font-size: 14px;
-      margin-top: 5px;
     }
-    .search-box {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 25px;
+
+    /* Result Box */
+    .result-section {
+      background: white;
+      max-width: 650px;
+      margin: 0 auto 35px;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    input[type="text"] {
-      flex: 1;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+
+    .result-section h2 {
+      color: #123c8c;
+      margin-bottom: 10px;
+    }
+
+    .result-section p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .result-input {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #d6e2f2;
+      border-radius: 10px;
       font-size: 16px;
       outline: none;
+      margin-bottom: 12px;
     }
-    input[type="text"]:focus {
-      border-color: #0056b3;
+
+    .result-input:focus {
+      border-color: #1769aa;
     }
-    button {
-      padding: 12px 20px;
-      background: #0056b3;
-      color: #fff;
+
+    .btn {
       border: none;
-      border-radius: 6px;
+      padding: 13px 25px;
+      border-radius: 10px;
+      background: #1769aa;
+      color: white;
       font-size: 16px;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
     }
-    button:hover {
-      background: #004085;
+
+    .btn:hover {
+      background: #123c8c;
+      transform: scale(1.02);
     }
-    .result-section {
-      display: none;
-      margin-top: 20px;
-      border-top: 1px dashed #ccc;
-      padding-top: 20px;
+
+    /* Notice */
+    .notice {
+      background: #fff8e1;
+      border-left: 5px solid #ff9800;
+      padding: 18px;
+      border-radius: 8px;
+      margin-bottom: 30px;
     }
-    .student-info {
-      margin-bottom: 15px;
-      font-size: 15px;
-      line-height: 1.6;
+
+    .notice h3 {
+      color: #e65100;
+      margin-bottom: 8px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 15px;
-    }
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-    th, td {
-      padding: 10px;
+
+    /* Footer */
+    footer {
+      background: #123c8c;
+      color: white;
       text-align: center;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin: 5px 0;
       font-size: 14px;
     }
-    th {
-      background: #f8f9fa;
-    }
-    .status {
-      font-weight: bold;
-      padding: 5px 10px;
-      border-radius: 4px;
+
+    .admin-btn {
+      margin-top: 12px;
       display: inline-block;
+      padding: 8px 18px;
+      border: 1px solid white;
+      border-radius: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
     }
-    .pass {
-      background: #d4edda;
-      color: #155724;
-    }
-    .fail {
-      background: #f8d7da;
-      color: #721c24;
-    }
-    .actions {
-      text-align: center;
-      margin-top: 15px;
-    }
-    .print-btn {
-      background: #28a745;
-    }
-    .print-btn:hover {
-      background: #218838;
-    }
-    .error-msg {
-      color: #dc3545;
-      text-align: center;
-      display: none;
-      font-weight: bold;
-    }
-    @media print {
-      body { background: #fff; padding: 0; }
-      .search-box, .actions { display: none; }
-      .card { box-shadow: none; border: none; width: 100%; max-width: 100%; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+
+      header h1 {
+        font-size: 21px;
+      }
+
+      header h2 {
+        font-size: 15px;
+      }
+
+      nav a {
+        margin: 0 5px;
+        font-size: 13px;
+      }
+
+      .welcome h2 {
+        font-size: 22px;
+      }
+
+      .result-section {
+        padding: 20px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="card">
-    <div class="header">
-      <h1>ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಶಾಲೆ</h1>
-      <p>Veera Ballala High School - Result Portal</p>
+  <!-- HEADER -->
+  <header>
+
+    <div class="school-icon">
+      🏫
     </div>
 
-    <div class="search-box">
-      <input type="text" id="regNo" placeholder="ನೋಂದಣಿ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ (उदा: 101, 102)...">
-      <button onclick="checkResult()">ಹುಡುಕಿ</button>
+    <h1>ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಗ್ರಾಮಾಂತರ ಪ್ರೌಢಶಾಲೆ</h1>
+
+    <h2>ಬಲ್ಲಾಳಸಮುದ್ರ, ಶ್ರೀರಾಂಪುರ ಹೋಬಳಿ</h2>
+
+    <p>ಹೊಸದುರ್ಗ ತಾಲ್ಲೂಕು, ಚಿತ್ರದುರ್ಗ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ</p>
+
+    <div class="academic-year">
+      ಶೈಕ್ಷಣಿಕ ವರ್ಷ 2026–27
     </div>
 
-    <div id="error" class="error-msg">ಫಲಿತಾಂಶ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಸರಿಯಾದ ನೋಂದಣಿ ಸಂಖ್ಯೆ ಹಾಕಿ.</div>
+  </header>
 
-    <div id="result" class="result-section">
-      <div class="student-info">
-        <p><strong>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು:</strong> <span id="sName"></span></p>
-        <p><strong>ನೋಂದಣಿ ಸಂಖ್ಯೆ:</strong> <span id="sRoll"></span></p>
-        <p><strong>ತರಗತಿ:</strong> 10th Standard</p>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#home">ಮುಖಪುಟ</a>
+    <a href="#result">ಫಲಿತಾಂಶ</a>
+    <a href="#about">ಶಾಲೆಯ ಬಗ್ಗೆ</a>
+    <a href="#contact">ಸಂಪರ್ಕ</a>
+  </nav>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="container" id="home">
+
+    <section class="welcome">
+
+      <h2>🎓 ವಿದ್ಯಾರ್ಥಿ ಫಲಿತಾಂಶ ನಿರ್ವಹಣಾ ವ್ಯವಸ್ಥೆ</h2>
+
+      <p>
+        ವಿದ್ಯಾರ್ಥಿಗಳ ಪರೀಕ್ಷಾ ಫಲಿತಾಂಶವನ್ನು ಸುಲಭವಾಗಿ ವೀಕ್ಷಿಸಲು
+        ನಮ್ಮ ಶಾಲೆಯ ಆನ್‌ಲೈನ್ ಫಲಿತಾಂಶ ವ್ಯವಸ್ಥೆ
+      </p>
+
+    </section>
+
+
+    <!-- CARDS -->
+    <section class="cards">
+
+      <div class="card">
+
+        <div class="icon">👨‍🎓</div>
+
+        <h3>ವಿದ್ಯಾರ್ಥಿಗಳು</h3>
+
+        <p>
+          ವಿದ್ಯಾರ್ಥಿಗಳ ವಿವರ ಮತ್ತು ಶೈಕ್ಷಣಿಕ ಮಾಹಿತಿಯನ್ನು ನಿರ್ವಹಿಸಿ
+        </p>
+
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ವಿಷಯ (Subject)</th>
-            <th>ಗರಿಷ್ಠ ಅಂಕ</th>
-            <th>ಪಡೆದ ಅಂಕ</th>
-          </tr>
-        </thead>
-        <tbody id="marksBody">
-          <!-- Marks added via JS -->
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>ಒಟ್ಟು ಅಂಕಗಳು</th>
-            <th>600</th>
-            <th id="totalMarks"></th>
-          </tr>
-        </tfoot>
-      </table>
 
-      <p style="margin-bottom: 10px;"><strong>ಶೇಕಡಾವಾರು (Percentage):</strong> <span id="percentage"></span>%</p>
-      <p><strong>ಫಲಿತಾಂಶ (Status):</strong> <span id="statusBadge" class="status"></span></p>
+      <div class="card">
 
-      <div class="actions">
-        <button class="print-btn" onclick="window.print()">ಪ್ರಿಂಟ್ ಮಾಡಿ (Print)</button>
+        <div class="icon">📝</div>
+
+        <h3>ಅಂಕ ನಮೂದು</h3>
+
+        <p>
+          ವಿಷಯವಾರು ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಗಳನ್ನು ನಮೂದಿಸುವ ವ್ಯವಸ್ಥೆ
+        </p>
+
       </div>
-    </div>
-  </div>
 
+
+      <div class="card">
+
+        <div class="icon">📊</div>
+
+        <h3>ಫಲಿತಾಂಶ</h3>
+
+        <p>
+          ಒಟ್ಟು ಅಂಕ, ಶೇಕಡಾವಾರು ಮತ್ತು ಗ್ರೇಡ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="icon">📄</div>
+
+        <h3>ಮಾರ್ಕ್ಸ್ ಕಾರ್ಡ್</h3>
+
+        <p>
+          ವಿದ್ಯಾರ್ಥಿಗಳ ಫಲಿತಾಂಶವನ್ನು ಮುದ್ರಿಸಿ ಅಥವಾ PDF ಆಗಿ ಪಡೆಯಿರಿ
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESULT SEARCH -->
+    <section class="result-section" id="result">
+
+      <h2>🔎 ವಿದ್ಯಾರ್ಥಿ ಫಲಿತಾಂಶ</h2>
+
+      <p>
+        ನಿಮ್ಮ Register Number ನಮೂದಿಸಿ ಫಲಿತಾಂಶ ವೀಕ್ಷಿಸಿ
+      </p>
+
+      <input
+        type="text"
+        id="registerNumber"
+        class="result-input"
+        placeholder="Register Number ನಮೂದಿಸಿ"
+      >
+
+      <button class="btn" onclick="checkResult()">
+        VIEW RESULT
+      </button>
+
+      <div id="resultMessage" style="margin-top:20px;"></div>
+
+    </section>
+
+
+    <!-- NOTICE -->
+    <section class="notice">
+
+      <h3>📢 ಸೂಚನೆ</h3>
+
+      <p>
+        ವಿದ್ಯಾರ್ಥಿಗಳು ತಮ್ಮ ಸರಿಯಾದ Register Number ಬಳಸಿ
+        ಫಲಿತಾಂಶವನ್ನು ವೀಕ್ಷಿಸಬಹುದು.
+      </p>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="result-section">
+
+      <h2>🏫 ನಮ್ಮ ಶಾಲೆ</h2>
+
+      <p>
+        ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಗ್ರಾಮಾಂತರ ಪ್ರೌಢಶಾಲೆ
+        ಬಲ್ಲಾಳಸಮುದ್ರ, ಶ್ರೀರಾಂಪುರ ಹೋಬಳಿ,
+        ಹೊಸದುರ್ಗ ತಾಲ್ಲೂಕು, ಚಿತ್ರದುರ್ಗ ಜಿಲ್ಲೆ.
+      </p>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="result-section">
+
+      <h2>📞 ಸಂಪರ್ಕ</h2>
+
+      <p>
+        ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಗ್ರಾಮಾಂತರ ಪ್ರೌಢಶಾಲೆ
+      </p>
+
+      <p>
+        ಬಲ್ಲಾಳಸಮುದ್ರ, ಹೊಸದುರ್ಗ ತಾಲ್ಲೂಕು,
+        ಚಿತ್ರದುರ್ಗ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ
+      </p>
+
+      <p style="margin-top:10px;">
+        ಶಾಲಾ ಕೋಡ್: 29130501906
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <p>
+      © 2026 ಶ್ರೀ ವೀರಬಲ್ಲಾಳ ಗ್ರಾಮಾಂತರ ಪ್ರೌಢಶಾಲೆ
+    </p>
+
+    <p>
+      Student Result Management System
+    </p>
+
+    <a href="#" class="admin-btn">
+      🔐 Admin Login
+    </a>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
   <script>
-    // ಮಾದರಿ ವಿದ್ಯಾರ್ಥಿ ಡೇಟಾ (ನಿಮಗೆ ಬೇಕಾದಂತೆ ಬದಲಾಯಿಸಿಕೊಳ್ಳಬಹುದು)
-    const studentsData = {
-      "101": {
-        name: "ರಮೇಶ್ ಕುಮಾರ್ (Ramesh Kumar)",
-        marks: { "ಕನ್ನಡ": 92, "ಇಂಗ್ಲಿಷ್": 85, "ಹಿಂದಿ": 80, "ಗಣಿತ": 88, "ವಿಜ್ಞಾನ": 90, "ಸಮಾಜ ವಿಜ್ಞಾನ": 86 }
-      },
-      "102": {
-        name: "ಸುಪ್ರಿಯಾ ಎನ್ (Supriya N)",
-        marks: { "ಕನ್ನಡ": 95, "ಇಂಗ್ಲಿಷ್": 91, "ಹಿಂದಿ": 89, "ಗಣಿತ": 96, "ವಿಜ್ಞಾನ": 94, "ಸಮಾಜ ವಿಜ್ಞಾನ": 92 }
-      },
-      "103": {
-        name: "ಮಹೇಶ್ ಬಿ (Mahesh B)",
-        marks: { "ಕನ್ನಡ": 45, "ಇಂಗ್ಲಿಷ್": 40, "ಹಿಂದಿ": 38, "ಗಣಿತ": 30, "ವಿಜ್ಞಾನ": 35, "ಸಮಾಜ ವಿಜ್ಞಾನ": 42 }
-      }
-    };
 
     function checkResult() {
-      const regNo = document.getElementById("regNo").value.trim();
-      const resultDiv = document.getElementById("result");
-      const errorDiv = document.getElementById("error");
-      const marksBody = document.getElementById("marksBody");
 
-      if (studentsData[regNo]) {
-        const student = studentsData[regNo];
-        document.getElementById("sName").textContent = student.name;
-        document.getElementById("sRoll").textContent = regNo;
+      const regNo =
+        document.getElementById("registerNumber").value.trim();
 
-        marksBody.innerHTML = "";
-        let total = 0;
-        let isPass = true;
+      const message =
+        document.getElementById("resultMessage");
 
-        for (const [subject, mark] of Object.entries(student.marks)) {
-          total += mark;
-          if (mark < 35) isPass = false;
-          marksBody.innerHTML += `<tr><td>${subject}</td><td>100</td><td>${mark}</td></tr>`;
-        }
+      if (regNo === "") {
 
-        const percentage = ((total / 600) * 100).toFixed(2);
-        document.getElementById("totalMarks").textContent = total;
-        document.getElementById("percentage").textContent = percentage;
+        message.innerHTML =
+          "<p style='color:red;font-weight:bold;'>ದಯವಿಟ್ಟು Register Number ನಮೂದಿಸಿ.</p>";
 
-        const badge = document.getElementById("statusBadge");
-        badge.textContent = isPass ? "PASS (ತೇರ್ಗಡೆ)" : "FAIL (ಅನುತ್ತೀರ್ಣ)";
-        badge.className = isPass ? "status pass" : "status fail";
-
-        errorDiv.style.display = "none";
-        resultDiv.style.display = "block";
-      } else {
-        resultDiv.style.display = "none";
-        errorDiv.style.display = "block";
+        return;
       }
+
+      message.innerHTML =
+        "<p style='color:#1769aa;font-weight:bold;'>🔄 Result database ಸಂಪರ್ಕಿಸಿದ ನಂತರ ಇಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಯ ಸಂಪೂರ್ಣ ಫಲಿತಾಂಶ ಕಾಣಿಸುತ್ತದೆ.</p>";
+
     }
+
   </script>
+
 </body>
 </html>
